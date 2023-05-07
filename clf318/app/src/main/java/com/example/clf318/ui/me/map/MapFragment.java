@@ -48,7 +48,7 @@ public class MapFragment extends Fragment {
     private BaiduMap mBaiduMap;
     private LocationClient mLocationClient;
     private PoiSearch mPoiSearch;
-    private LatLng latLng;//经纬度
+    //private LatLng latLng;//经纬度
 
     public  class MyPoiOverlay extends PoiOverlay{
 
@@ -89,9 +89,11 @@ public class MapFragment extends Fragment {
             MyLocationData locData = new MyLocationData.Builder()
                     .accuracy(location.getRadius())
                     // 此处设置开发者获取到的方向信息，顺时针0-360
-                    .direction(location.getDirection()).latitude(location.getLatitude())
-                    .longitude(location.getLongitude()).build();
-            latLng=new LatLng(location.getLatitude(),location.getLongitude());
+                    //.direction(location.getDirection()).latitude(location.getLatitude())
+                    //.longitude(location.getLongitude()).build();
+            .latitude(31.270157)
+                    .longitude(120.745253).build();
+            //latLng=new LatLng(location.getLatitude(),location.getLongitude());
             mBaiduMap.setMyLocationData(locData);
         }
     }
@@ -179,13 +181,15 @@ public class MapFragment extends Fragment {
         EditText editText=root.findViewById(R.id.editText);
         Button button=root.findViewById(R.id.button);
         button.setOnClickListener(view -> {
-            String keyword = editText.getText().toString();
+            //String keyword = editText.getText().toString();
             mPoiSearch.searchNearby(new PoiNearbySearchOption()
-                    .location(latLng)
-                    .radius(10000)
+                    .location(new LatLng(31.0634,120.4821))
+                    .radius(100000000)
             //支持多个关键字并集检索，不同关键字间以$符号分隔，最多支持10个关键字检索。如:”银行$酒店”
-                    .keyword(keyword));
+                    .keyword("suzhou"));
         });
+
+
         return root;
     }
     @Override
